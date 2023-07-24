@@ -6,8 +6,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@EnableJpaRepositories(value = " com.invicto.ms.template.restms.repo")
-@EntityScan(" com.invicto.ms.template.restms.entity")
+@EnableJpaRepositories
 public class RestMsApplication {
 
 	public static void main(String[] args) {
