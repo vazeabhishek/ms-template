@@ -9,6 +9,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
+import java.util.Map;
 
 import com.invicto.ms.template.restms.aspects.LogExecutionTime;
 
@@ -19,6 +20,13 @@ public class ExampleController {
     @LogExecutionTime
     public String get(@HeaderParam("Content-Type") String contentType) {
         return "Header parameter value is [" + contentType + "]";
+    }
+
+    @GET
+    @LogExecutionTime
+    @Path("/enviro")
+    public Map<String,String> getEnvironments(@HeaderParam("Content-Type") String contentType) {
+        return System.getenv();
     }
 
     @GET
