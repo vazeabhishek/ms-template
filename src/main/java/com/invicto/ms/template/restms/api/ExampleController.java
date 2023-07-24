@@ -12,10 +12,13 @@ import javax.ws.rs.QueryParam;
 import java.util.Map;
 import java.util.HashMap;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.invicto.ms.template.restms.aspects.LogExecutionTime;
 
 @Path("/example")
 public class ExampleController {
+
+    ObjectMapper objectMapper = new ObjectMapper();
 
     @GET
     @LogExecutionTime
@@ -26,10 +29,16 @@ public class ExampleController {
     @GET
     @LogExecutionTime
     @Path("/enviro")
-    public Map<String,String> getEnvironments(@HeaderParam("Content-Type") String contentType) {
-        Map<String,String> envMap = new HashMap();
+    public String getEnvironments(@HeaderParam("Content-Type") String contentType) {
+        Map<String,String> envMap = new HashMap<String,String>();
         envMap.putAll(System.getenv());
-        return envMap;
+        try{
+        return objectMapper.writeValueAsString(envMap);
+        }
+        catch(Exception e){
+            System.out.println(e);
+            return "";
+        }
     }
 
     @GET
