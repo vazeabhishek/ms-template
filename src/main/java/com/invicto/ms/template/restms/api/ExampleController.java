@@ -64,10 +64,12 @@ public class ExampleController {
         try
         {
         String r = objectMapper.writeValueAsString(allLogs);
+        System.out.println(r);
         return r;
         }
         catch(Exception e){
-            return "";
+             System.out.println(e);
+            return "error";
         } 
 
     }
