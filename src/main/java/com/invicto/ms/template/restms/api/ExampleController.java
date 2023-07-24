@@ -64,6 +64,7 @@ public class ExampleController {
         try
         {
         String r = objectMapper.writeValueAsString(allLogs);
+        return r;
         }
         catch(Exception e){
             return "";
