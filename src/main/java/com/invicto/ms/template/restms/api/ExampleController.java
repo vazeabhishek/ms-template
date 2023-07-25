@@ -16,6 +16,8 @@ import com.invicto.ms.template.restms.aspects.LogExecutionTime;
 import org.springframework.beans.factory.annotation.*;
 import com.invicto.ms.template.restms.repo.*;
 import com.invicto.ms.template.restms.entity.*;
+import org.springframework.beans.factory.annotation.Value;import org.springframework.beans.factory.annotation.Value;
+
 
 @Path("/example")
 public class ExampleController {
@@ -24,6 +26,9 @@ public class ExampleController {
 
     @Autowired
     public LogsRepo repo;
+
+    @Value("${message}")
+    private String configValue;
 
     @GET
     @LogExecutionTime
@@ -47,7 +52,7 @@ public class ExampleController {
     }
 
     @GET
-    @Path("/{p}")
+    @Path("/hello/{p}")
     public String getWithPathParam(@PathParam("p") String param) {
         Logs log = build("GETWITHPARAM "+param);
         repo.save(log);
@@ -97,6 +102,14 @@ public class ExampleController {
     @PATCH
     public String patch() {
         return "Hello";
+
+    }
+
+    @GET
+    @Path("/configs")
+    public String getWithPathParam() {
+        
+        return "Hello" + configValue;
 
     }
 
