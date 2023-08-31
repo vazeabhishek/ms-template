@@ -13,9 +13,9 @@ public class LogExecutionTimeImpl{
 
     @Around("@annotation(com.invicto.ms.template.restms.aspect.LogExecutionTime)")
     public Object logExecutionTimeToConsole(ProceedingJoinPoint joinPoint) throws Throwable {
-        var start = System.currentTimeMillis();
+        long start = System.currentTimeMillis();
         Object proceed = joinPoint.proceed();
-        var stop = System.currentTimeMillis();
+        long stop = System.currentTimeMillis();
         log.info("{} -> Time taken to execute {} : {}ms", joinPoint.getSignature(), (stop - start));
         return proceed;
     }
